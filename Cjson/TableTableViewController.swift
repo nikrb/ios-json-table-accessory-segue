@@ -10,6 +10,7 @@ import UIKit
 
 class TableTableViewController: UITableViewController {
     
+    var selected_ndx_path : NSIndexPath?
     var drill_grouped_list = [String: [Drill]]()
     var drill_section_titles = [String]()
     
@@ -120,6 +121,33 @@ class TableTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return index
     }
+    
+    @IBAction func unwindToTableView( sender:UIButton){
+        print("unwindToTableView")
+    }
+    
+    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        selected_ndx_path = indexPath
+        print( "table view accessory selected")
+        /*
+        let dest = self.storyboard?.instantiateViewControllerWithIdentifier("drillDetailView") as! DrillDetailViewController
+        self.presentViewController(dest, animated: true, completion: nil)
+        
+        let section_title = self.drill_section_titles[indexPath.section]
+        let section = drill_grouped_list[section_title]
+        
+        dest.typeLabel.text = section![indexPath.row].type
+        dest.phaseLabel.text = section![indexPath.row].phase
+        dest.specialLabel.text = section![indexPath.row].special
+        dest.nameLabel.text = section![indexPath.row].name
+        dest.refLabel.text = section![indexPath.row].ref
+        dest.descLabel.text = section![indexPath.row].desc
+        */
+        /* black screen
+        let vc = DrillDetailViewController()
+        self.presentViewController(vc, animated: true, completion: nil)
+        */
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -156,14 +184,27 @@ class TableTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        print( "prepare for seque [\(segue.identifier)]")
+        if segue.identifier == "ShowDrillDetail" {
+            if let dest = segue.destinationViewController as? DrillDetailViewController {
+                if let ndxpath = selected_ndx_path {
+                    let section_title = self.drill_section_titles[ndxpath.section]
+                    let section = drill_grouped_list[section_title]
+                    
+                    dest.typeLabel.text = section![ndxpath.row].type
+                    dest.phaseLabel.text = section![ndxpath.row].phase
+                    dest.specialLabel.text = section![ndxpath.row].special
+                    dest.nameLabel.text = section![ndxpath.row].name
+                    dest.refLabel.text = section![ndxpath.row].ref
+                    dest.descLabel.text = section![ndxpath.row].desc
+                }
+            }
+        }
     }
-    */
-
 }
