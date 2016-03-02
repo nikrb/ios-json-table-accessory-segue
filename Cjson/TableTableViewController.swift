@@ -11,6 +11,8 @@ import UIKit
 class TableTableViewController: UITableViewController {
     
     var drill_list = [Drill]()
+    var drill_grouped_list = [String: [Drill]]()
+    var drill_section_titles = [String]()
     
     struct Drill {
         var _id:String?
@@ -45,13 +47,13 @@ class TableTableViewController: UITableViewController {
         print( "starting request")
         let url = NSURL(string: "https://mongo-load-knik.c9users.io/")
         let request = NSURLRequest(URL: url!)
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, responce, error) -> Void in
-            print( "@dataTaskWithRequest")
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) -> Void in
             if error != nil {
                 print(error)
             } else {
                 do {
                     if let json_data = try NSJSONSerialization.JSONObjectWithData(data!, options: [NSJSONReadingOptions.MutableContainers]) as? NSMutableArray {
+                        var current_section = ""
                         for i in 0..<json_data.count {
                             let _id = json_data[i]["_id"] as! String
                             let name = json_data[i]["name"] as! String
@@ -60,8 +62,22 @@ class TableTableViewController: UITableViewController {
                             let special = json_data[i]["special"] as! String
                             let ref = json_data[i]["ref"] as! String
                             let desc = json_data[i]["desc"] as! String
-                            let d = Drill(_id: _id, type: type, phase: phase, special: special, name: name, ref: ref, desc: desc)
-                            self.drill_list.append( d)
+                            let drill = Drill(_id: _id, type: type, phase: phase, special: special, name: name, ref: ref, desc: desc)
+                            self.drill_list.append( drill)
+                            print( "section [\(drill.type!) \(drill.phase!)] name[\(drill.name!)]")
+                            // table section grouping
+                            let section = "\(type) \(phase)"
+                            if section != current_section {
+                                print( "new section [\(section)]")
+                                current_section = section
+                                self.drill_grouped_list[section] = [Drill]()
+                                self.drill_section_titles.append( section )
+                            }
+                            self.drill_grouped_list[section]?.append( drill)
+                        }
+                        print( "data formatted, reloading table view. section data:")
+                        for section in self.drill_section_titles {
+                            print( "section[\(section)] count[\(self.drill_grouped_list[section]!.count)]")
                         }
                         self.drillTableView.reloadData()
                     } else {
@@ -79,21 +95,42 @@ class TableTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return self.drill_grouped_list.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.drill_list.count ?? 0
+        var row_count = 0
+        let section_title = drill_section_titles[section]
+        if let drills = drill_grouped_list[section_title] {
+            row_count = drills.count
+            print( "number of rows in section ndx[\(section)] section[\(section_title)] count[\(row_count)]")
+        }
+        return row_count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath)
         
-        let drill = self.drill_list[indexPath.row]
+        let section_title = self.drill_section_titles[indexPath.section]
+        let section = drill_grouped_list[section_title]
         
-        cell.textLabel?.text = drill.name
+        cell.textLabel?.text = section![indexPath.row].name
+        
+        print( "cell section[\(indexPath.section)] count[\(section!.count)] title[\(section_title)] row[\(indexPath.row)] name[\(section![indexPath.row])]")
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return drill_section_titles[section]
+    }
+    
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+        return self.drill_section_titles
+    }
+    
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        return index
     }
 
     /*
