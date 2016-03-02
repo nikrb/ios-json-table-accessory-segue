@@ -10,7 +10,7 @@ import UIKit
 
 class TableTableViewController: UITableViewController {
     
-    var selected_ndx_path : NSIndexPath?
+    var selected_ndx_path = NSIndexPath(forRow: 1, inSection: 1)
     var drill_grouped_list = [String: [Drill]]()
     var drill_section_titles = [String]()
     
@@ -65,7 +65,6 @@ class TableTableViewController: UITableViewController {
                             // table section grouping
                             let section = "\(type) \(phase)"
                             if section != current_section {
-                                print( "new section [\(section)]")
                                 current_section = section
                                 self.drill_grouped_list[section] = [Drill]()
                                 self.drill_section_titles.append( section )
@@ -127,8 +126,8 @@ class TableTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        print( "@set selected ndx path section[\(indexPath.section)] row[\(indexPath.row)]")
         selected_ndx_path = indexPath
-        print( "table view accessory selected")
     }
 
     /*
@@ -172,19 +171,17 @@ class TableTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        print( "prepare for seque [\(segue.identifier)]")
         if segue.identifier == "ShowDrillDetail" {
             if let dest = segue.destinationViewController as? DrillDetailViewController {
-                if let ndxpath = selected_ndx_path {
-                    let section_title = self.drill_section_titles[ndxpath.section]
-                    let section = drill_grouped_list[section_title]
-                    
-                    dest.typeLabel.text = section![ndxpath.row].type
-                    dest.phaseLabel.text = section![ndxpath.row].phase
-                    dest.specialLabel.text = section![ndxpath.row].special
-                    dest.nameLabel.text = section![ndxpath.row].name
-                    dest.refLabel.text = section![ndxpath.row].ref
-                    dest.descLabel.text = section![ndxpath.row].desc
+                let ndxpath = selected_ndx_path
+                let section_title = self.drill_section_titles[ndxpath.section]
+                if let section = drill_grouped_list[section_title] {
+                    dest.labelStrings[0] = section[ndxpath.row].type!
+                    dest.labelStrings[1] = section[ndxpath.row].phase!
+                    dest.labelStrings[2] = section[ndxpath.row].special!
+                    dest.labelStrings[3] = section[ndxpath.row].name!
+                    dest.labelStrings[4] = section[ndxpath.row].ref!
+                    dest.labelStrings[5] = section[ndxpath.row].desc!
                 }
             }
         }

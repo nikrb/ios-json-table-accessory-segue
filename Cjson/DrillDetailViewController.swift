@@ -9,7 +9,9 @@
 import UIKit
 
 class DrillDetailViewController: UIViewController {
-
+    
+    var labelStrings = [String]( count: 6, repeatedValue: "n/a")
+    
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var phaseLabel: UILabel!
     @IBOutlet weak var specialLabel: UILabel!
@@ -21,6 +23,12 @@ class DrillDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        typeLabel.text = labelStrings[0]
+        phaseLabel.text = labelStrings[1]
+        specialLabel.text = labelStrings[2]
+        nameLabel.text = labelStrings[3]
+        refLabel.text = labelStrings[4]
+        descLabel.text = labelStrings[5]
     }
 
     override func didReceiveMemoryWarning() {
