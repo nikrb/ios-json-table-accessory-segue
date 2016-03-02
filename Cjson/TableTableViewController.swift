@@ -10,7 +10,6 @@ import UIKit
 
 class TableTableViewController: UITableViewController {
     
-    var drill_list = [Drill]()
     var drill_grouped_list = [String: [Drill]]()
     var drill_section_titles = [String]()
     
@@ -44,7 +43,6 @@ class TableTableViewController: UITableViewController {
     }
     
     func fetchData(){
-        print( "starting request")
         let url = NSURL(string: "https://mongo-load-knik.c9users.io/")
         let request = NSURLRequest(URL: url!)
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) -> Void in
@@ -63,8 +61,6 @@ class TableTableViewController: UITableViewController {
                             let ref = json_data[i]["ref"] as! String
                             let desc = json_data[i]["desc"] as! String
                             let drill = Drill(_id: _id, type: type, phase: phase, special: special, name: name, ref: ref, desc: desc)
-                            self.drill_list.append( drill)
-                            print( "section [\(drill.type!) \(drill.phase!)] name[\(drill.name!)]")
                             // table section grouping
                             let section = "\(type) \(phase)"
                             if section != current_section {
@@ -74,10 +70,6 @@ class TableTableViewController: UITableViewController {
                                 self.drill_section_titles.append( section )
                             }
                             self.drill_grouped_list[section]?.append( drill)
-                        }
-                        print( "data formatted, reloading table view. section data:")
-                        for section in self.drill_section_titles {
-                            print( "section[\(section)] count[\(self.drill_grouped_list[section]!.count)]")
                         }
                         self.drillTableView.reloadData()
                     } else {
@@ -89,7 +81,6 @@ class TableTableViewController: UITableViewController {
             }
         }
         task.resume()
-        print( "request sent, I presume")
     }
 
     // MARK: - Table view data source
@@ -103,7 +94,6 @@ class TableTableViewController: UITableViewController {
         let section_title = drill_section_titles[section]
         if let drills = drill_grouped_list[section_title] {
             row_count = drills.count
-            print( "number of rows in section ndx[\(section)] section[\(section_title)] count[\(row_count)]")
         }
         return row_count
     }
@@ -115,8 +105,6 @@ class TableTableViewController: UITableViewController {
         let section = drill_grouped_list[section_title]
         
         cell.textLabel?.text = section![indexPath.row].name
-        
-        print( "cell section[\(indexPath.section)] count[\(section!.count)] title[\(section_title)] row[\(indexPath.row)] name[\(section![indexPath.row])]")
         
         return cell
     }
