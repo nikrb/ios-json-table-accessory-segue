@@ -31,7 +31,13 @@
                             <outlet property="delegate" destination="i35-Nn-4iI" id="yCL-pj-8hr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Drills" id="JIC-OR-lNb"/>
+                    <navigationItem key="navigationItem" title="Drills" id="JIC-OR-lNb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="bMH-ao-hav">
+                            <connections>
+                                <action selector="drillSelectDoneButton:" destination="i35-Nn-4iI" id="szf-mw-g4u"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="drillTableView" destination="Bzn-hG-pCk" id="bpY-iM-Pys"/>
                     </connections>

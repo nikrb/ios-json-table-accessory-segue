@@ -9,7 +9,7 @@
 import UIKit
 
 class TableTableViewController: UITableViewController {
-    
+    var selected_ndxpaths : [NSIndexPath]?
     var selected_ndx_path = NSIndexPath(forRow: 1, inSection: 1)
     var drill_grouped_list = [String: [Drill]]()
     var drill_section_titles = [String]()
@@ -83,6 +83,10 @@ class TableTableViewController: UITableViewController {
         task.resume()
     }
 
+    @IBAction func drillSelectDoneButton(sender: UIBarButtonItem) {
+        selected_ndxpaths = drillTableView.indexPathsForSelectedRows
+        print( "selected index paths [\(selected_ndxpaths)]")
+    }
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -129,6 +133,8 @@ class TableTableViewController: UITableViewController {
         print( "@set selected ndx path section[\(indexPath.section)] row[\(indexPath.row)]")
         selected_ndx_path = indexPath
     }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.
