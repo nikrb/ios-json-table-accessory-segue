@@ -129,24 +129,6 @@ class TableTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         selected_ndx_path = indexPath
         print( "table view accessory selected")
-        /*
-        let dest = self.storyboard?.instantiateViewControllerWithIdentifier("drillDetailView") as! DrillDetailViewController
-        self.presentViewController(dest, animated: true, completion: nil)
-        
-        let section_title = self.drill_section_titles[indexPath.section]
-        let section = drill_grouped_list[section_title]
-        
-        dest.typeLabel.text = section![indexPath.row].type
-        dest.phaseLabel.text = section![indexPath.row].phase
-        dest.specialLabel.text = section![indexPath.row].special
-        dest.nameLabel.text = section![indexPath.row].name
-        dest.refLabel.text = section![indexPath.row].ref
-        dest.descLabel.text = section![indexPath.row].desc
-        */
-        /* black screen
-        let vc = DrillDetailViewController()
-        self.presentViewController(vc, animated: true, completion: nil)
-        */
     }
 
     /*
