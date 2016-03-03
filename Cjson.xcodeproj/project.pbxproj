@@ -8,18 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		BC9BAE241C8558A40023905A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9BAE231C8558A40023905A /* AppDelegate.swift */; };
-		BC9BAE291C8558A40023905A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC9BAE271C8558A40023905A /* Main.storyboard */; };
 		BC9BAE2C1C8558A40023905A /* Cjson.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC9BAE2A1C8558A40023905A /* Cjson.xcdatamodeld */; };
 		BC9BAE2E1C8558A40023905A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC9BAE2D1C8558A40023905A /* Assets.xcassets */; };
 		BC9BAE311C8558A40023905A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC9BAE2F1C8558A40023905A /* LaunchScreen.storyboard */; };
 		BCEDFF3D1C86832F00E632AE /* DrillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDFF3C1C86832F00E632AE /* DrillDetailViewController.swift */; };
 		BCF9BB8A1C87B1F50038A9CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF9BB891C87B1F50038A9CB /* ViewController.swift */; };
+		BCF9BB8D1C87BFB70038A9CB /* CheckboxUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF9BB8C1C87BFB70038A9CB /* CheckboxUI.swift */; };
+		BCF9BB8F1C87C24F0038A9CB /* DrillCompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF9BB8E1C87C24F0038A9CB /* DrillCompleteTableViewCell.swift */; };
+		BCF9BB921C87CD460038A9CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCF9BB901C87CD460038A9CB /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BC9BAE201C8558A40023905A /* Cjson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cjson.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC9BAE231C8558A40023905A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BC9BAE281C8558A40023905A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BC9BAE2B1C8558A40023905A /* Cjson.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cjson.xcdatamodel; sourceTree = "<group>"; };
 		BC9BAE2D1C8558A40023905A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC9BAE301C8558A40023905A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -27,6 +28,9 @@
 		BCEDFF3C1C86832F00E632AE /* DrillDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrillDetailViewController.swift; sourceTree = "<group>"; };
 		BCF9BB871C87B11F0038A9CB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BCF9BB891C87B1F50038A9CB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BCF9BB8C1C87BFB70038A9CB /* CheckboxUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxUI.swift; sourceTree = "<group>"; };
+		BCF9BB8E1C87C24F0038A9CB /* DrillCompleteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrillCompleteTableViewCell.swift; sourceTree = "<group>"; };
+		BCF9BB911C87CD460038A9CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,16 +64,26 @@
 		BC9BAE221C8558A40023905A /* Cjson */ = {
 			isa = PBXGroup;
 			children = (
+				BCF9BB8B1C87BF7C0038A9CB /* CheckboxUI */,
 				BCEDFF3C1C86832F00E632AE /* DrillDetailViewController.swift */,
 				BC9BAE231C8558A40023905A /* AppDelegate.swift */,
-				BC9BAE271C8558A40023905A /* Main.storyboard */,
+				BCF9BB8E1C87C24F0038A9CB /* DrillCompleteTableViewCell.swift */,
 				BCF9BB891C87B1F50038A9CB /* ViewController.swift */,
+				BCF9BB901C87CD460038A9CB /* Main.storyboard */,
 				BC9BAE2D1C8558A40023905A /* Assets.xcassets */,
 				BC9BAE2F1C8558A40023905A /* LaunchScreen.storyboard */,
 				BC9BAE321C8558A40023905A /* Info.plist */,
 				BC9BAE2A1C8558A40023905A /* Cjson.xcdatamodeld */,
 			);
 			path = Cjson;
+			sourceTree = "<group>";
+		};
+		BCF9BB8B1C87BF7C0038A9CB /* CheckboxUI */ = {
+			isa = PBXGroup;
+			children = (
+				BCF9BB8C1C87BFB70038A9CB /* CheckboxUI.swift */,
+			);
+			name = CheckboxUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,9 +144,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCF9BB921C87CD460038A9CB /* Main.storyboard in Resources */,
 				BC9BAE311C8558A40023905A /* LaunchScreen.storyboard in Resources */,
 				BC9BAE2E1C8558A40023905A /* Assets.xcassets in Resources */,
-				BC9BAE291C8558A40023905A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +157,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCF9BB8F1C87C24F0038A9CB /* DrillCompleteTableViewCell.swift in Sources */,
+				BCF9BB8D1C87BFB70038A9CB /* CheckboxUI.swift in Sources */,
 				BCF9BB8A1C87B1F50038A9CB /* ViewController.swift in Sources */,
 				BC9BAE2C1C8558A40023905A /* Cjson.xcdatamodeld in Sources */,
 				BC9BAE241C8558A40023905A /* AppDelegate.swift in Sources */,
@@ -153,20 +169,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		BC9BAE271C8558A40023905A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BC9BAE281C8558A40023905A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BC9BAE2F1C8558A40023905A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				BC9BAE301C8558A40023905A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		BCF9BB901C87CD460038A9CB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BCF9BB911C87CD460038A9CB /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

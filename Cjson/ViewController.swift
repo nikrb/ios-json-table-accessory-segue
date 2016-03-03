@@ -18,7 +18,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     var selected_ndxpaths : [NSIndexPath]?
-    var selected_ndx_path = NSIndexPath(forRow: 1, inSection: 1)
+    var selected_ndx_path = NSIndexPath(forRow: 0, inSection: 0)
     var drill_grouped_list = [String: [Drill]]()
     var drill_section_titles = [String]()
     
@@ -114,14 +114,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath)
+        let rcell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath)
+        if let cell = rcell as? DrillCompleteTableViewCell {
         
-        let section_title = self.drill_section_titles[indexPath.section]
-        let section = drill_grouped_list[section_title]
-        
-        cell.textLabel?.text = section![indexPath.row].name
-        
-        return cell
+            let section_title = self.drill_section_titles[indexPath.section]
+            let section = drill_grouped_list[section_title]
+            
+            // cell.textLabel!.text = section![indexPath.row].name
+            cell.drillNameLabel!.text = section![indexPath.row].name
+        }
+        return rcell
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -136,13 +138,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return index
     }
     
-    @IBAction func unwindToTableView( sender:UIButton){
-        print("unwindToTableView")
-    }
-    
     func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         print( "@set selected ndx path section[\(indexPath.section)] row[\(indexPath.row)]")
         selected_ndx_path = indexPath
+        /**
+        Had to do it this way. When using storyboard accessory segue the prepareForSegue is called
+        before we set the selected_ndx_path.
+        I suspect this isn't the best way to do this, but it works for now as the table selection
+        is disabled. If it weren't we need to presentViewController type method
+        **/
+        performSegueWithIdentifier("AccessoryShowDrillDetail", sender: self)
     }
     
     // MARK: - Navigation
@@ -152,6 +157,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "AccessoryShowDrillDetail" {
+            print( "segue to drill detail")
             if let dest = segue.destinationViewController as? DrillDetailViewController {
                 let ndxpath = selected_ndx_path
                 let section_title = self.drill_section_titles[ndxpath.section]
