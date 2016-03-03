@@ -8,9 +8,21 @@
 
 import UIKit
 
+protocol CheckboxUIDelegate {
+    func didSelectCheckbox( sender:CheckboxUI, index_path:NSIndexPath);
+}
+
 class CheckboxUI: UILabel {
     let unchecked = String( "\u{2b1c}")
     let checked = String( "\u{2705}")
+    
+    var delegate : CheckboxUIDelegate?
+    
+    var index_path = NSIndexPath(forRow: 0, inSection: 0)
+    
+    func setIndexPath( ndxpath : NSIndexPath){
+        index_path = ndxpath
+    }
     
     func toggleCheckBox( sender : UILabel){
         if self.text == checked {
@@ -39,6 +51,7 @@ class CheckboxUI: UILabel {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
         toggleCheckBox( self)
+        delegate?.didSelectCheckbox( self, index_path: index_path)
     }
     
     override func drawTextInRect(rect: CGRect) {

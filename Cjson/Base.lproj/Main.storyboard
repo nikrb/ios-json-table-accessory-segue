@@ -58,13 +58,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOw-py-u6c" customClass="CheckboxUI" customModule="Cjson" customModuleProvider="target">
-                                                    <rect key="frame" x="478" y="0.0" width="35" height="35"/>
+                                                    <rect key="frame" x="478" y="4" width="35" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14H-EM-ncy">
-                                                    <rect key="frame" x="0.0" y="0.0" width="470" height="35"/>
+                                                    <rect key="frame" x="0.0" y="4" width="470" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -74,7 +74,6 @@
                                         <connections>
                                             <outlet property="completeCheckbox" destination="vOw-py-u6c" id="01Q-9F-vJB"/>
                                             <outlet property="drillNameLabel" destination="14H-EM-ncy" id="xJ4-lc-aFJ"/>
-                                            <segue destination="sqs-Qb-PuK" kind="show" identifier="AccessoryShowDrillDetail" id="XHm-PY-9Qt"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -193,6 +192,18 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F8B-0f-5I1">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="2fa-Q9-LD2">
+                                        <barButtonItem key="leftBarButtonItem" title="&lt;Back" id="4SE-Kt-esl">
+                                            <connections>
+                                                <segue destination="ysh-FF-djs" kind="unwind" unwindAction="unwindToDrillList:" id="oN6-79-k4i"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -207,6 +218,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aUd-6u-rM8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ysh-FF-djs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2492" y="378"/>
         </scene>

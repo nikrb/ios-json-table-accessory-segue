@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DrillCompleteCheckboxDelegate {
 
     @IBOutlet weak var drillTableView: UITableView! {
         didSet {
@@ -30,6 +30,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var name:String?
         var ref:String?
         var desc:String?
+        var selected:Bool?
     }
     
     
@@ -69,7 +70,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 let special = json_data[i]["special"] as! String
                                 let ref = json_data[i]["ref"] as! String
                                 let desc = json_data[i]["desc"] as! String
-                                let drill = Drill(_id: _id, type: type, phase: phase, special: special, name: name, ref: ref, desc: desc)
+                                let drill = Drill(_id: _id, type: type, phase: phase, special: special, name: name, ref: ref, desc: desc, selected: false)
                                 // table section grouping
                                 let section = "\(type) \(phase)"
                                 if section != current_section {
@@ -113,6 +114,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return row_count
     }
     
+    func didSelectCheckboxAtIndex(sender: CheckboxUI, index_path: NSIndexPath) {
+        print( "did select checkbox section[\(index_path.section)] row[\(index_path.row)]")
+        let section_title = self.drill_section_titles[index_path.section]
+        if var section = drill_grouped_list[section_title] {
+            section[index_path.row].selected = sender.isChecked()
+            for i in 0..<section.count {
+                let drill = section[i]
+                print( "drill selections row[\(i)] selected[\(drill.selected!)]")
+            }
+        }
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let rcell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath)
         if let cell = rcell as? DrillCompleteTableViewCell {
@@ -122,10 +135,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             // cell.textLabel!.text = section![indexPath.row].name
             cell.drillNameLabel!.text = section![indexPath.row].name
+            
+            // FIXME: the section objects are losing the selected property setting
+            cell.completeCheckbox.setChecked( section![indexPath.row].selected!)
+            print( "reuse cell checkbox selected [\(section![indexPath.row].selected!)]")
+            cell.completeCheckbox.setIndexPath(indexPath)
+            cell.delegate = self
         }
         return rcell
     }
-    
+        
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return drill_section_titles[section]
     }
@@ -147,10 +166,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         I suspect this isn't the best way to do this, but it works for now as the table selection
         is disabled. If it weren't we need to presentViewController type method
         **/
-        performSegueWithIdentifier("AccessoryShowDrillDetail", sender: self)
+        if let dest = storyboard?.instantiateViewControllerWithIdentifier("drillDetailView") as? DrillDetailViewController {
+            let ndxpath = selected_ndx_path
+            let section_title = self.drill_section_titles[ndxpath.section]
+            if let section = drill_grouped_list[section_title] {
+                dest.labelStrings[0] = section[ndxpath.row].type!
+                dest.labelStrings[1] = section[ndxpath.row].phase!
+                dest.labelStrings[2] = section[ndxpath.row].special!
+                dest.labelStrings[3] = section[ndxpath.row].name!
+                dest.labelStrings[4] = section[ndxpath.row].ref!
+                dest.labelStrings[5] = section[ndxpath.row].desc!
+            }
+            presentViewController( dest, animated: true, completion: nil)
+        }
+        // performSegueWithIdentifier("AccessoryShowDrillDetail", sender: self)
     }
     
     // MARK: - Navigation
+    
+    @IBAction func unwindToDrillList( sender : UIStoryboardSegue){
+        print( "unwind to drill list")
+    }
+    
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -158,6 +195,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Pass the selected object to the new view controller.
         if segue.identifier == "AccessoryShowDrillDetail" {
             print( "segue to drill detail")
+            /*
             if let dest = segue.destinationViewController as? DrillDetailViewController {
                 let ndxpath = selected_ndx_path
                 let section_title = self.drill_section_titles[ndxpath.section]
@@ -169,7 +207,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     dest.labelStrings[4] = section[ndxpath.row].ref!
                     dest.labelStrings[5] = section[ndxpath.row].desc!
                 }
-            }
+            }*/
         }
     }
 }

@@ -8,10 +8,24 @@
 
 import UIKit
 
-class DrillCompleteTableViewCell: UITableViewCell {
+protocol DrillCompleteCheckboxDelegate {
+    func didSelectCheckboxAtIndex( sender:CheckboxUI, index_path:NSIndexPath)
+}
+
+class DrillCompleteTableViewCell: UITableViewCell, CheckboxUIDelegate {
 
     @IBOutlet weak var drillNameLabel: UILabel!
-    @IBOutlet weak var completeCheckbox: CheckboxUI!
+    @IBOutlet weak var completeCheckbox: CheckboxUI! {
+        didSet {
+            completeCheckbox.delegate = self
+        }
+    }
+    var delegate : DrillCompleteCheckboxDelegate?
+    
+    func didSelectCheckbox( sender:CheckboxUI, index_path: NSIndexPath) {
+        print( "checkbox selected section[\(index_path.section)] row[\(index_path.row)]")
+        delegate?.didSelectCheckboxAtIndex( sender, index_path: index_path)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
