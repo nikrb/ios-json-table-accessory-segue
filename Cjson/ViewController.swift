@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DrillCompleteCheckboxDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DrillCompleteTableViewCellDelegate {
 
     @IBOutlet weak var drillTableView: UITableView! {
         didSet {
@@ -114,14 +114,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return row_count
     }
     
-    func didSelectCheckboxAtIndex(sender: CheckboxUI, index_path: NSIndexPath) {
-        print( "did select checkbox section[\(index_path.section)] row[\(index_path.row)]")
-        let section_title = self.drill_section_titles[index_path.section]
-        if var section = drill_grouped_list[section_title] {
-            section[index_path.row].selected = sender.isChecked()
-            for i in 0..<section.count {
-                let drill = section[i]
-                print( "drill selections row[\(i)] selected[\(drill.selected!)]")
+    
+    func click(button_parent: DrillCompleteTableViewCell) {
+        print( "@complete button clicked")
+        let sender = button_parent.drillCompleteButton!
+        let pt = sender.convertPoint(CGPoint.zero, toView: drillTableView)
+        if let index_path = drillTableView.indexPathForRowAtPoint( pt){
+            print( "selected checkbox index path section[\(index_path.section)] row[\(index_path.row)]")
+            let section_title = self.drill_section_titles[index_path.section]
+            if var section = drill_grouped_list[section_title] {
+                print( "set section[\(index_path.section)] row[\(index_path.row)] currently selected [\(section[index_path.row])]")
+                section[index_path.row].selected = !button_parent.isChecked()
             }
         }
     }
@@ -135,15 +138,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             // cell.textLabel!.text = section![indexPath.row].name
             cell.drillNameLabel!.text = section![indexPath.row].name
-            
-            // FIXME: the section objects are losing the selected property setting
-            cell.completeCheckbox.setChecked( section![indexPath.row].selected!)
-            print( "reuse cell checkbox selected [\(section![indexPath.row].selected!)]")
-            cell.completeCheckbox.setIndexPath(indexPath)
-            cell.delegate = self
+            cell.setChecked( section![indexPath.row].selected!)
         }
         return rcell
     }
+        
+        
         
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return drill_section_titles[section]
