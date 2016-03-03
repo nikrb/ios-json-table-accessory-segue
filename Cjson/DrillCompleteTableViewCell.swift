@@ -23,7 +23,6 @@ class DrillCompleteTableViewCell: UITableViewCell, CheckboxUIDelegate {
     var delegate : DrillCompleteCheckboxDelegate?
     
     func didSelectCheckbox( sender:CheckboxUI, index_path: NSIndexPath) {
-        print( "checkbox selected section[\(index_path.section)] row[\(index_path.row)]")
         delegate?.didSelectCheckboxAtIndex( sender, index_path: index_path)
     }
     
