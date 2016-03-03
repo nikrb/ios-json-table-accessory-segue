@@ -58,7 +58,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="sqs-Qb-PuK" kind="show" identifier="AccessoryShowDrillDetail" trigger="accessoryAction" id="nD5-jT-ZMZ"/>
+                                            <segue destination="sqs-Qb-PuK" kind="show" identifier="ShowDrillDetail" id="3pf-VC-ATz"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

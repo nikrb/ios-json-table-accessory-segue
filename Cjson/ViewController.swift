@@ -140,9 +140,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print("unwindToTableView")
     }
     
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        // don't segue when we're selecting rows to add to the workout
+        // accessory tap performSegueWithIdentifier doesn't trigger this function
+        return false
+    }
+    
     func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         print( "@set selected ndx path section[\(indexPath.section)] row[\(indexPath.row)]")
         selected_ndx_path = indexPath
+        performSegueWithIdentifier( "ShowDrillDetail", sender: self)
     }
     
     // MARK: - Navigation
@@ -151,7 +158,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "AccessoryShowDrillDetail" {
+        if segue.identifier == "ShowDrillDetail" {
             if let dest = segue.destinationViewController as? DrillDetailViewController {
                 let ndxpath = selected_ndx_path
                 let section_title = self.drill_section_titles[ndxpath.section]
