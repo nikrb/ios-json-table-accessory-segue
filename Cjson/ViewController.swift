@@ -84,6 +84,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         }
                     } catch {
                         print("data fetch failed")
+                        let a = UIAlertController(title: "Server offline", message: "Data fetch failed. App will work but drills will not be available", preferredStyle: .Alert)
+                        
+                        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        a.addAction(defaultAction)
+                        
+                        self.presentViewController( a, animated: true, completion: nil)
                     }
                     dispatch_async(dispatch_get_main_queue()){
                         self.drillTableView.reloadData()
