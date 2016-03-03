@@ -1,50 +1,97 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fG2-2R-N8y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AAf-5U-91G">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Drills-->
-        <scene sceneID="6Jf-ac-RTE">
+        <!--Workout-->
+        <scene sceneID="jMj-wI-4LY">
             <objects>
-                <tableViewController id="i35-Nn-4iI" customClass="TableTableViewController" customModule="Cjson" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Bzn-hG-pCk">
+                <viewController id="Cml-vO-aH4" customClass="ViewController" customModule="Cjson" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BdF-I6-1Yi"/>
+                        <viewControllerLayoutGuide type="bottom" id="oAd-4n-9zf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vLg-qZ-jZS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="drillCell" id="05i-Un-XRe">
-                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="05i-Un-XRe" id="FSF-S8-S8d">
-                                    <rect key="frame" x="0.0" y="0.0" width="553" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="sqs-Qb-PuK" kind="show" identifier="ShowDrillDetail" trigger="accessoryAction" id="knH-WS-Odu"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="i35-Nn-4iI" id="srY-1i-h9p"/>
-                            <outlet property="delegate" destination="i35-Nn-4iI" id="yCL-pj-8hr"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Drills" id="JIC-OR-lNb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="bMH-ao-hav">
-                            <connections>
-                                <action selector="drillSelectDoneButton:" destination="i35-Nn-4iI" id="szf-mw-g4u"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcV-tN-rXO">
+                                <rect key="frame" x="63" y="76" width="45" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xwo-zS-Fg3">
+                                <rect key="frame" x="116" y="72" width="464" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v7o-tD-Wjq">
+                                <rect key="frame" x="20" y="120" width="88" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OAb-AC-GdU">
+                                <rect key="frame" x="116" y="116" width="464" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drills" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfK-ZO-ede">
+                                <rect key="frame" x="281" y="154" width="39" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xvy-Jb-0cY">
+                                <rect key="frame" x="20" y="183" width="560" height="397"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="drillCell" id="9b4-Zf-OMD">
+                                        <rect key="frame" x="0.0" y="28" width="560" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9b4-Zf-OMD" id="Gol-Dz-rDY">
+                                            <rect key="frame" x="0.0" y="0.0" width="513" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="sqs-Qb-PuK" kind="show" identifier="AccessoryShowDrillDetail" trigger="accessoryAction" id="nD5-jT-ZMZ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Xwo-zS-Fg3" firstAttribute="leading" secondItem="tcV-tN-rXO" secondAttribute="trailing" constant="8" id="0rB-pq-VPH"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Xvy-Jb-0cY" secondAttribute="leading" id="1OT-hs-wjt"/>
+                            <constraint firstItem="tcV-tN-rXO" firstAttribute="leading" secondItem="vLg-qZ-jZS" secondAttribute="leadingMargin" constant="43" id="7M9-oW-Th3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OAb-AC-GdU" secondAttribute="trailing" id="A6G-zc-2fr"/>
+                            <constraint firstItem="OAb-AC-GdU" firstAttribute="top" secondItem="Xwo-zS-Fg3" secondAttribute="bottom" constant="14" id="FNl-C3-c9e"/>
+                            <constraint firstItem="OAb-AC-GdU" firstAttribute="leading" secondItem="v7o-tD-Wjq" secondAttribute="trailing" constant="8" id="LP1-Kq-2aG"/>
+                            <constraint firstItem="hfK-ZO-ede" firstAttribute="top" secondItem="OAb-AC-GdU" secondAttribute="bottom" constant="8" id="NPe-z1-b1X"/>
+                            <constraint firstItem="Xwo-zS-Fg3" firstAttribute="top" secondItem="BdF-I6-1Yi" secondAttribute="bottom" constant="8" id="RjF-2B-H1G"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="v7o-tD-Wjq" secondAttribute="leading" id="TSa-m9-2ds"/>
+                            <constraint firstItem="Xvy-Jb-0cY" firstAttribute="top" secondItem="hfK-ZO-ede" secondAttribute="bottom" constant="8" id="aFL-jv-07F"/>
+                            <constraint firstItem="v7o-tD-Wjq" firstAttribute="centerY" secondItem="OAb-AC-GdU" secondAttribute="centerY" id="d5l-h2-d5S"/>
+                            <constraint firstItem="oAd-4n-9zf" firstAttribute="top" secondItem="Xvy-Jb-0cY" secondAttribute="bottom" constant="20" id="h4f-JJ-9gS"/>
+                            <constraint firstItem="tcV-tN-rXO" firstAttribute="centerY" secondItem="Xwo-zS-Fg3" secondAttribute="centerY" id="ivY-Gr-3Th"/>
+                            <constraint firstItem="hfK-ZO-ede" firstAttribute="centerX" secondItem="vLg-qZ-jZS" secondAttribute="centerX" id="lVe-hX-w0R"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Xvy-Jb-0cY" secondAttribute="trailing" id="qaQ-E1-P9S"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Xwo-zS-Fg3" secondAttribute="trailing" id="u1F-9g-Ypx"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Workout" id="eT5-I1-dV9"/>
                     <connections>
-                        <outlet property="drillTableView" destination="Bzn-hG-pCk" id="bpY-iM-Pys"/>
+                        <outlet property="drillTableView" destination="Xvy-Jb-0cY" id="5BR-pQ-HKp"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gJe-nD-Rrn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PTb-qO-8a7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1667" y="378"/>
+            <point key="canvasLocation" x="1709" y="378"/>
         </scene>
         <!--Drill-->
         <scene sceneID="Ho0-Bi-4c2">
@@ -148,22 +195,22 @@
             <point key="canvasLocation" x="2492" y="378"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="8h0-1E-bmj">
+        <scene sceneID="6MR-iW-R3x">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fG2-2R-N8y" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AAf-5U-91G" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GAJ-m4-dct">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eG7-1y-TCe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="i35-Nn-4iI" kind="relationship" relationship="rootViewController" id="ies-rf-ewV"/>
+                        <segue destination="Cml-vO-aH4" kind="relationship" relationship="rootViewController" id="vRA-Cv-w5S"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wsh-nS-Eqm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UyU-CR-HtM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="829" y="378"/>
+            <point key="canvasLocation" x="871" y="378"/>
         </scene>
     </scenes>
 </document>
