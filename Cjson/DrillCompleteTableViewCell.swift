@@ -8,14 +8,11 @@
 
 import UIKit
 
-protocol DrillCompleteTableViewCellDelegate {
-    func click( button_parent : DrillCompleteTableViewCell)
-}
-
 class DrillCompleteTableViewCell: UITableViewCell {
     
     let unchecked = String( "\u{2b1c}")
     let checked = String( "\u{2705}")
+    var drill:ViewController.Drill?
     
     @IBOutlet weak var drillNameLabel: UILabel!
     @IBOutlet weak var drillCompleteButton: UIButton! {
@@ -24,15 +21,16 @@ class DrillCompleteTableViewCell: UITableViewCell {
         }
     }
     
-    var delegate:DrillCompleteTableViewCellDelegate?
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        <#code#>
+    // FIXME: noooooo
+    func setDrill( drill : ViewController.Drill){
+        self.drill = drill
+        let check = drill.selected! ? checked : unchecked
+        drillCompleteButton!.setTitle( check, forState: .Normal)
     }
     
     @IBAction func completeButton(sender: UIButton) {
         print( "completion button clicked")
-        delegate?.click(self)
+        // delegate?.click(self)
     }
     
     func setChecked( check : Bool ){

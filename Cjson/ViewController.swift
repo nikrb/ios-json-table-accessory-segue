@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DrillCompleteTableViewCellDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var drillTableView: UITableView! {
         didSet {
@@ -114,7 +114,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return row_count
     }
     
-    
+    /*
     func click(button_parent: DrillCompleteTableViewCell) {
         print( "@complete button clicked")
         let sender = button_parent.drillCompleteButton!
@@ -127,7 +127,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 section[index_path.row].selected = !button_parent.isChecked()
             }
         }
-    }
+    }*/
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let rcell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath)
@@ -138,7 +138,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             // cell.textLabel!.text = section![indexPath.row].name
             cell.drillNameLabel!.text = section![indexPath.row].name
-            cell.setChecked( section![indexPath.row].selected!)
+            cell.setDrill( section![indexPath.row])
+            // cell.setChecked( section![indexPath.row].selected!)
         }
         return rcell
     }
