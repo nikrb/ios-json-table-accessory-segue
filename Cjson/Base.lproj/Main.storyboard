@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OAb-AC-GdU">
-                                <rect key="frame" x="116" y="110" width="426" height="30"/>
+                                <rect key="frame" x="116" y="110" width="464" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -88,13 +88,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sx2-zQ-h66">
-                                <rect key="frame" x="550" y="109" width="30" height="30"/>
-                                <state key="normal" title="H"/>
-                                <connections>
-                                    <action selector="testButton:" destination="Cml-vO-aH4" eventType="touchUpInside" id="Hg1-0B-QKV"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -102,8 +95,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="Xvy-Jb-0cY" secondAttribute="leading" id="1OT-hs-wjt"/>
                             <constraint firstItem="tcV-tN-rXO" firstAttribute="leading" secondItem="vLg-qZ-jZS" secondAttribute="leadingMargin" constant="43" id="7M9-oW-Th3"/>
                             <constraint firstItem="OAb-AC-GdU" firstAttribute="top" secondItem="Xwo-zS-Fg3" secondAttribute="bottom" constant="8" symbolic="YES" id="BsP-0b-YNQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Sx2-zQ-h66" secondAttribute="trailing" id="G5S-Q3-wwK"/>
-                            <constraint firstItem="Sx2-zQ-h66" firstAttribute="leading" secondItem="OAb-AC-GdU" secondAttribute="trailing" constant="8" id="Gbs-iO-Pzp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OAb-AC-GdU" secondAttribute="trailing" id="Lta-YQ-tzL"/>
                             <constraint firstItem="Xwo-zS-Fg3" firstAttribute="top" secondItem="BdF-I6-1Yi" secondAttribute="bottom" constant="8" id="RjF-2B-H1G"/>
                             <constraint firstItem="hfK-ZO-ede" firstAttribute="top" secondItem="OAb-AC-GdU" secondAttribute="bottom" constant="8" symbolic="YES" id="WxS-oc-11q"/>
                             <constraint firstItem="Xvy-Jb-0cY" firstAttribute="top" secondItem="hfK-ZO-ede" secondAttribute="bottom" constant="8" id="aFL-jv-07F"/>
@@ -112,16 +104,20 @@
                             <constraint firstItem="oAd-4n-9zf" firstAttribute="top" secondItem="Xvy-Jb-0cY" secondAttribute="bottom" constant="20" id="h4f-JJ-9gS"/>
                             <constraint firstItem="tcV-tN-rXO" firstAttribute="centerY" secondItem="Xwo-zS-Fg3" secondAttribute="centerY" id="ivY-Gr-3Th"/>
                             <constraint firstItem="hfK-ZO-ede" firstAttribute="centerX" secondItem="vLg-qZ-jZS" secondAttribute="centerX" id="lVe-hX-w0R"/>
-                            <constraint firstItem="Sx2-zQ-h66" firstAttribute="baseline" secondItem="OAb-AC-GdU" secondAttribute="baseline" id="ox3-wd-39y"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Xvy-Jb-0cY" secondAttribute="trailing" id="qaQ-E1-P9S"/>
                             <constraint firstAttribute="leadingMargin" secondItem="v7o-tD-Wjq" secondAttribute="leading" id="r1a-MI-w9x"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Xwo-zS-Fg3" secondAttribute="trailing" id="u1F-9g-Ypx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Workout" id="eT5-I1-dV9"/>
+                    <navigationItem key="navigationItem" title="Workout" id="eT5-I1-dV9">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="sM9-O2-zuJ">
+                            <connections>
+                                <action selector="doneButton:" destination="Cml-vO-aH4" id="1uW-Yv-ugU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="drillTableView" destination="Xvy-Jb-0cY" id="5BR-pQ-HKp"/>
-                        <outlet property="testButton" destination="Sx2-zQ-h66" id="6uf-Rl-nkX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PTb-qO-8a7" userLabel="First Responder" sceneMemberID="firstResponder"/>

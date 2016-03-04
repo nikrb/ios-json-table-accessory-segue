@@ -39,7 +39,6 @@ class DrillCompleteTableViewCell: UITableViewCell {
     func isChecked() -> Bool {
         var ret = false
         if let txt = drillCompleteButton.titleLabel?.text {
-            print( "table view cell is checked [\(txt)]")
             if txt == checked {
                 ret = true
             }
@@ -57,5 +56,4 @@ class DrillCompleteTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

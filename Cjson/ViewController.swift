@@ -10,21 +10,11 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DrillCompleteTableViewCellDelegate {
 
-    @IBOutlet weak var testButton: UIButton!
-    
     @IBOutlet weak var drillTableView: UITableView! {
         didSet {
             drillTableView.delegate = self
             drillTableView.dataSource = self
         }
-    }
-    
-    func buttonTitleChanged( sender: AnyObject){
-        print( "button title changed to [\(testButton.titleLabel?.text!)]")
-    }
-    
-    @IBAction func testButton(sender: UIButton) {
-        sender.setTitle("M", forState: .Normal)
     }
     
     var selected_ndx_path : NSIndexPath?
@@ -53,6 +43,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    // MARK: Actions
+    
     func drillCompleteChecked(sender: UIButton, isChecked : Bool) {
         let touchPoint = sender.convertPoint(CGPoint.zero, toView:drillTableView)
         let indexPath = drillTableView.indexPathForRowAtPoint(touchPoint)
@@ -60,6 +52,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var drill = test_data[indexPath!.row]
         drill.selected = isChecked
     }
+    
+    @IBAction func doneButton(sender: UIBarButtonItem) {
+        for i in 0..<6 {
+            let drill = test_data[i]
+            print( "drill name[\(drill.name)] selected[\(drill.selected)]")
+        }
+    }
+    
     
     // MARK: - Table view data source
     
