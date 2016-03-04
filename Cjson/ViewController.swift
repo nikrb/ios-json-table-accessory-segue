@@ -17,18 +17,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    var selected_ndx_path : NSIndexPath?
-    var test_data = [Drill]()
-    
     struct Drill {
         var name:String?
         var selected:Bool?
     }
     
+    var test_data = [Drill]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchDataTest()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,7 +42,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     // MARK: Actions
+    @IBAction func doneButton(sender: UIBarButtonItem) {
+        for i in 0..<6 {
+            let drill = test_data[i]
+            print( "drill name[\(drill.name)] selected[\(drill.selected)]")
+        }
+    }
     
+    // MARK: DrillCompleteTableViewCellDelegate
     func drillCompleteChecked(sender: UIButton, isChecked : Bool) {
         let touchPoint = sender.convertPoint(CGPoint.zero, toView:drillTableView)
         let indexPath = drillTableView.indexPathForRowAtPoint(touchPoint)
@@ -53,16 +58,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         drill.selected = isChecked
     }
     
-    @IBAction func doneButton(sender: UIBarButtonItem) {
-        for i in 0..<6 {
-            let drill = test_data[i]
-            print( "drill name[\(drill.name)] selected[\(drill.selected)]")
-        }
-    }
-    
     
     // MARK: - Table view data source
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -74,14 +71,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let rcell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath)
         if let cell = rcell as? DrillCompleteTableViewCell {
-            
             let drill = test_data[indexPath.row]
             
             cell.drillNameLabel!.text = drill.name
             cell.delegate = self
             cell.setChecked( drill.selected!)
-            
-            
         }
         return rcell
     }
