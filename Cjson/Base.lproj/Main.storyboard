@@ -118,11 +118,46 @@
                     </navigationItem>
                     <connections>
                         <outlet property="drillTableView" destination="Xvy-Jb-0cY" id="5BR-pQ-HKp"/>
+                        <segue destination="esj-HU-eU7" kind="show" identifier="ShowTestSegue" id="MuP-Wx-wKS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PTb-qO-8a7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1709" y="378"/>
+        </scene>
+        <!--Test segue-->
+        <scene sceneID="bfO-X4-50r">
+            <objects>
+                <viewController storyboardIdentifier="SegueTestViewController" id="3dj-sV-Bqj" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="t7S-Mj-ufi"/>
+                        <viewControllerLayoutGuide type="bottom" id="jaV-eO-t5K"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UvN-lw-UcJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Segue Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82T-qX-D0J">
+                                <rect key="frame" x="20" y="72" width="86" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Test segue" id="8Wg-Al-2dH">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="aHo-qk-Phl">
+                            <connections>
+                                <segue destination="fOD-eX-NFz" kind="unwind" unwindAction="unwindToDrillList:" id="O0a-5A-FOy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nwo-6w-Fbu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="fOD-eX-NFz" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3260" y="378"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6MR-iW-R3x">
@@ -141,6 +176,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UyU-CR-HtM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="871" y="378"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eAc-pf-pg9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="esj-HU-eU7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nyL-7C-j84">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3dj-sV-Bqj" kind="relationship" relationship="rootViewController" id="IfR-gO-T6h"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lRo-PZ-j5b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2448" y="378"/>
         </scene>
     </scenes>
 </document>

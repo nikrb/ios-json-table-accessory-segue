@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DrillCompleteTableViewCellDelegate {
 
+    var selected_drill : Drill?
+    
     @IBOutlet weak var drillTableView: UITableView! {
         didSet {
             drillTableView.delegate = self
@@ -57,6 +59,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var drill = test_data[indexPath!.row]
         drill.selected = isChecked
         print( "@ViewController.drillCompleteChecked drill selected is [\(drill.selected)]")
+        
+        // segue works with correct value for drill.selected
+        selected_drill = drill
+        // TODO: this version doesn't show nav bar or cancel bar item button
+        // without nav controller default back button doesn't show either
+        // let nvc = storyboard?.instantiateViewControllerWithIdentifier("SegueTestViewController")
+        // presentViewController( nvc!, animated: true, completion: nil)
+        
+        // TODO: This works using a dummy segue identifier
+        performSegueWithIdentifier( "ShowTestSegue", sender: self)
     }
     
     
@@ -76,6 +88,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             cell.drillNameLabel!.text = drill.name
             cell.delegate = self
+            // FIXME: drill selected loses its value
             cell.setChecked( drill.selected!)
         }
         return rcell
@@ -86,6 +99,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     // MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // TODO: drill selected is set correct here!
+        print( "@prepare for segue id[\(segue.identifier)] for drill:", selected_drill  )
+    }
     
     @IBAction func unwindToDrillList( sender : UIStoryboardSegue){
         print( "unwind to drill list")
