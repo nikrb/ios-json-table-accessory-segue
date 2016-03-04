@@ -8,40 +8,43 @@
 
 import UIKit
 
+protocol DrillCompleteTableViewCellDelegate {
+    func drillCompleteChecked( sender : UIButton, isChecked:Bool)
+}
+
 class DrillCompleteTableViewCell: UITableViewCell {
+    var delegate:DrillCompleteTableViewCellDelegate?
     
     let unchecked = String( "\u{2b1c}")
     let checked = String( "\u{2705}")
-    var drill:ViewController.Drill?
     
     @IBOutlet weak var drillNameLabel: UILabel!
     @IBOutlet weak var drillCompleteButton: UIButton! {
         didSet {
             drillCompleteButton.setTitle(unchecked, forState: .Normal)
+            drillCompleteButton.addTarget( self, action: Selector( "completeButton:"), forControlEvents: .TouchUpInside)
         }
     }
     
-    // FIXME: noooooo
-    func setDrill( drill : ViewController.Drill){
-        self.drill = drill
-        let check = drill.selected! ? checked : unchecked
-        drillCompleteButton!.setTitle( check, forState: .Normal)
-    }
-    
-    @IBAction func completeButton(sender: UIButton) {
-        print( "completion button clicked")
-        // delegate?.click(self)
+    @IBAction func completeButton( sender : UIButton){
+        let check = isChecked() ? false : true
+        setChecked( check)
+        delegate?.drillCompleteChecked( sender, isChecked: check)
     }
     
     func setChecked( check : Bool ){
         drillCompleteButton.setTitle( check ? checked : unchecked, forState: .Normal)
-        drillCompleteButton.setTitle( check ? checked : unchecked, forState: .Selected )
-        drillCompleteButton.setTitle( check ? checked : unchecked, forState: .Focused )
-        drillCompleteButton.setTitle( check ? checked : unchecked, forState: .Highlighted )
     }
     
     func isChecked() -> Bool {
-        return drillCompleteButton.titleLabel?.text == checked
+        var ret = false
+        if let txt = drillCompleteButton.titleLabel?.text {
+            print( "table view cell is checked [\(txt)]")
+            if txt == checked {
+                ret = true
+            }
+        }
+        return ret
     }
         
     override func awakeFromNib() {

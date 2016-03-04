@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DrillCompleteTableViewCellDelegate {
 
     @IBOutlet weak var drillTableView: UITableView! {
         didSet {
@@ -95,6 +95,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         task.resume()
     }
     
+    func drillCompleteChecked(sender: UIButton, isChecked : Bool) {
+        let touchPoint = sender.convertPoint(CGPoint.zero, toView:drillTableView)
+        let indexPath = drillTableView.indexPathForRowAtPoint(touchPoint)
+        
+        let section_title = self.drill_section_titles[indexPath!.section]
+        let section = drill_grouped_list[section_title]
+        
+        var drill = section![indexPath!.row]
+        print( "setting drill name [\(drill.name!)] selected [\(drill.selected!)] to [\(isChecked)]")
+        drill.selected = isChecked
+        print( "after setting selected is [\(drill.selected)]")
+    }
+    
     @IBAction func drillSelectDoneButton(sender: UIBarButtonItem) {
         selected_ndxpaths = drillTableView.indexPathsForSelectedRows
         print( "selected index paths [\(selected_ndxpaths)]")
@@ -114,21 +127,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return row_count
     }
     
-    /*
-    func click(button_parent: DrillCompleteTableViewCell) {
-        print( "@complete button clicked")
-        let sender = button_parent.drillCompleteButton!
-        let pt = sender.convertPoint(CGPoint.zero, toView: drillTableView)
-        if let index_path = drillTableView.indexPathForRowAtPoint( pt){
-            print( "selected checkbox index path section[\(index_path.section)] row[\(index_path.row)]")
-            let section_title = self.drill_section_titles[index_path.section]
-            if var section = drill_grouped_list[section_title] {
-                print( "set section[\(index_path.section)] row[\(index_path.row)] currently selected [\(section[index_path.row])]")
-                section[index_path.row].selected = !button_parent.isChecked()
-            }
-        }
-    }*/
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let rcell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath)
         if let cell = rcell as? DrillCompleteTableViewCell {
@@ -136,15 +134,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let section_title = self.drill_section_titles[indexPath.section]
             let section = drill_grouped_list[section_title]
             
-            // cell.textLabel!.text = section![indexPath.row].name
+            print( "cell for row [\(section![indexPath.row].name!)] at index path selected [\(section![indexPath.row].selected!)]")
+            
             cell.drillNameLabel!.text = section![indexPath.row].name
-            cell.setDrill( section![indexPath.row])
-            // cell.setChecked( section![indexPath.row].selected!)
+            cell.delegate = self
+            cell.setChecked( section![indexPath.row].selected!)
         }
         return rcell
     }
         
-        
+    
         
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return drill_section_titles[section]

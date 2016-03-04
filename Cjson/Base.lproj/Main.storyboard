@@ -66,6 +66,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1IX-Ky-4co">
                                                     <rect key="frame" x="470" y="4" width="35" height="35"/>
                                                     <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="completeButton:" destination="PTb-qO-8a7" eventType="touchUpInside" id="xvA-S3-VCN"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
