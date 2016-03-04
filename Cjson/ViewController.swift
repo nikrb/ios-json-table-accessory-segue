@@ -68,7 +68,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // let nvc = storyboard?.instantiateViewControllerWithIdentifier("SegueTestViewController")
         // presentViewController( nvc!, animated: true, completion: nil)
         
-        // TODO: This works using a dummy segue identifier
+        // TODO: This works using a dummy segue identifier, selected is retained on segue return
         performSegueWithIdentifier( "ShowTestSegue", sender: self)
     }
     
