@@ -100,7 +100,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Xwo-zS-Fg3" secondAttribute="trailing" id="u1F-9g-Ypx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Workout" id="eT5-I1-dV9"/>
+                    <navigationItem key="navigationItem" title="Workout" id="eT5-I1-dV9">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="D59-Of-mqj">
+                            <connections>
+                                <action selector="doneButton:" destination="Cml-vO-aH4" id="gG1-YX-m40"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="drillTableView" destination="Xvy-Jb-0cY" id="5BR-pQ-HKp"/>
                     </connections>

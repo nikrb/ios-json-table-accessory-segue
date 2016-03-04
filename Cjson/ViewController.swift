@@ -103,15 +103,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let section = drill_grouped_list[section_title]
         
         var drill = section![indexPath!.row]
-        print( "setting drill name [\(drill.name!)] selected [\(drill.selected!)] to [\(isChecked)]")
         drill.selected = isChecked
-        print( "after setting selected is [\(drill.selected)]")
+        print( "drill section[\(indexPath!.section)] row[\(indexPath!.row)] name [\(drill.name!)] after setting selected is [\(drill.selected!)]")
     }
     
-    @IBAction func drillSelectDoneButton(sender: UIBarButtonItem) {
-        selected_ndxpaths = drillTableView.indexPathsForSelectedRows
-        print( "selected index paths [\(selected_ndxpaths)]")
+    @IBAction func doneButton(sender: UIBarButtonItem) {
+        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        let section_title = self.drill_section_titles[indexPath.section]
+        let section = drill_grouped_list[section_title]
+        for d in section! {
+            print( "drill name[\(d.name!)] selected[\(d.selected!)]")
+        }
     }
+    
     // MARK: - Table view data source
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -134,7 +138,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let section_title = self.drill_section_titles[indexPath.section]
             let section = drill_grouped_list[section_title]
             
-            print( "cell for row [\(section![indexPath.row].name!)] at index path selected [\(section![indexPath.row].selected!)]")
+            // print( "cell for row [\(section![indexPath.row].name!)] at index path selected [\(section![indexPath.row].selected!)]")
             
             cell.drillNameLabel!.text = section![indexPath.row].name
             cell.delegate = self
