@@ -58,6 +58,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         var drill = test_data[indexPath!.row]
         drill.selected = isChecked
+        
         print( "@ViewController.drillCompleteChecked drill selected is [\(drill.selected)]")
         
         // segue works with correct value for drill.selected
