@@ -50,7 +50,6 @@ class DrillCompleteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        drillCompleteButton.titleLabel?.text = checked
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
